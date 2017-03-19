@@ -1,29 +1,34 @@
 package factsforfalk.theprojectx;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.recylcer_view);
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.recylcer_view);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "floatingactionbutton", Toast.LENGTH_LONG).show();
-            }
-        }));
-    }
+		FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+		floatingActionButton.setOnClickListener((new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				Intent intent = new Intent(MainActivity.this, ShoppingListAdd.class);
+				startActivity(intent);
+			}
+		}));
+	}
 
-
-    public void setActionBarTitle(String title) {
-        getSupportActionBar().setTitle(title);
-    }
+	public void setActionBarTitle(String title)
+	{
+		getSupportActionBar().setTitle(title);
+	}
 }
