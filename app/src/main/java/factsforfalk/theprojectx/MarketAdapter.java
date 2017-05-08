@@ -1,21 +1,12 @@
 package factsforfalk.theprojectx;
 
-/**
- * Created by Martin on 02.05.2017.
- */
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import java.util.List;
-
-/**
- * Created by Martin on 08.04.2017.
- */
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
