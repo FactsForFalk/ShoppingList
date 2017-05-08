@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity
 		// Lookup the recyclerview in activity layout
 		RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
 
-		// Initialize markets
+		// Initialize shoppingLists
 		shoppingLists = ShoppingList.createShoppingLists();
 		// Create adapter passing in the sample user data
-		MarketAdapter adapter = new MarketAdapter(this, shoppingLists);
+		ShoppingListAdapter adapter = new ShoppingListAdapter(this, shoppingLists);
 		// Attach the adapter to the recyclerview to populate items
 		rvContacts.setAdapter(adapter);
 		// Set layout manager to position the items

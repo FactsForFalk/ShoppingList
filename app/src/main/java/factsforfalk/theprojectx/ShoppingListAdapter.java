@@ -10,7 +10,7 @@ import java.util.List;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
-public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder>
+public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>
 {
 
 	// Provide a direct reference to each of the views within a data item
@@ -29,17 +29,17 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 			// to access the context from any ViewHolder instance.
 			super(itemView);
 
-			nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
+			nameTextView = (TextView) itemView.findViewById(R.id.shoppinglist_name);
 		}
 	}
 
-	// Store a member variable for the markets
+	// Store a member variable for the shopping-lists
 	private List<ShoppingList> mShoppingLists;
 	// Store the context for easy access
 	private Context mContext;
 
 	// Pass in the contact array into the constructor
-	public MarketAdapter( Context context, List<ShoppingList> shoppingLists )
+	public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists )
 	{
 		mShoppingLists = shoppingLists;
 		mContext = context;
@@ -53,13 +53,13 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 
 	// Usually involves inflating a layout from XML and returning the holder
 	@Override
-	public MarketAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	public ShoppingListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
 	{
 		Context context = parent.getContext();
 		LayoutInflater inflater = LayoutInflater.from(context);
 
 		// Inflate the custom layout
-		View contactView = inflater.inflate(R.layout.item_market, parent, false);
+		View contactView = inflater.inflate(R.layout.item_shoppinglist, parent, false);
 
 		// Return a new holder instance
 		ViewHolder viewHolder = new ViewHolder(contactView);
@@ -68,14 +68,14 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 
 	// Involves populating data into the item through holder
 	@Override
-	public void onBindViewHolder(MarketAdapter.ViewHolder viewHolder, int position)
+	public void onBindViewHolder(ShoppingListAdapter.ViewHolder viewHolder, int position)
 	{
 		// Get the data model based on position
-		ShoppingList market = mShoppingLists.get(position);
+		ShoppingList shoppingList = mShoppingLists.get(position);
 
 		// Set item views based on your views and data model
 		TextView textView = viewHolder.nameTextView;
-		textView.setText(market.getName());
+		textView.setText(shoppingList.getName());
 	}
 
 	// Returns the total count of items in the list
