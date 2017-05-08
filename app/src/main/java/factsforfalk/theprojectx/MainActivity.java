@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
+    RecyclerView rvShoppingLists;
+    ShoppingListAdapter adapter;
 	ArrayList<ShoppingList> shoppingLists;
 
 	@Override
@@ -21,16 +23,16 @@ public class MainActivity extends AppCompatActivity
 
 		// setContentView(R.layout.activity_users);
 		// Lookup the recyclerview in activity layout
-		RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
+		rvShoppingLists = (RecyclerView) findViewById(R.id.rvContacts);
 
 		// Initialize shoppingLists
 		shoppingLists = ShoppingList.createShoppingLists();
 		// Create adapter passing in the sample user data
-		ShoppingListAdapter adapter = new ShoppingListAdapter(this, shoppingLists);
+		adapter = new ShoppingListAdapter(this, shoppingLists);
 		// Attach the adapter to the recyclerview to populate items
-		rvContacts.setAdapter(adapter);
+        rvShoppingLists.setAdapter(adapter);
 		// Set layout manager to position the items
-		rvContacts.setLayoutManager(new LinearLayoutManager(this));
+        rvShoppingLists.setLayoutManager(new LinearLayoutManager(this));
 		// That's all!
 
 		FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
@@ -40,9 +42,21 @@ public class MainActivity extends AppCompatActivity
 			public void onClick(View v)
 			{
 				Intent intent = new Intent(MainActivity.this, ShoppingListAdd.class);
-				startActivity(intent);
+				startActivityForResult(intent, 1); //1: code for adding new shoppinglist
 			}
 		}));
 	}
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) { //1: code for adding new shoppinglist
+            if (resultCode == RESULT_OK) { //user filled out and submitted form
+                String listName = data.getStringExtra("listName");
+                String listDescription = data.getStringExtra("listDescription");
+
+                shoppingLists.add(new ShoppingList(0, listName, listDescription, null, null));
+            } else {
+                System.out.println("result of Intent is not RESULT_OK");
+            }
+        }
+    }
 }
