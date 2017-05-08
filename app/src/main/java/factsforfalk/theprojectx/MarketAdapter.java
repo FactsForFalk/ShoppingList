@@ -29,7 +29,6 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 		// Your holder should contain a member variable
 		// for any view that will be set as you render a row
 		public TextView nameTextView;
-		public Button messageButton;
 
 		// We also create a constructor that accepts the entire item row
 		// and does the view lookups to find each subview
@@ -40,7 +39,6 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 			super(itemView);
 
 			nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
-			messageButton = (Button) itemView.findViewById(R.id.message_button);
 		}
 	}
 
@@ -87,8 +85,6 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 		// Set item views based on your views and data model
 		TextView textView = viewHolder.nameTextView;
 		textView.setText(market.getName());
-		Button button = viewHolder.messageButton;
-		button.setText("Message");
 	}
 
 	// Returns the total count of items in the list
