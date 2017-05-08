@@ -34,14 +34,14 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 	}
 
 	// Store a member variable for the markets
-	private List<Market> mMarkets;
+	private List<ShoppingList> mShoppingLists;
 	// Store the context for easy access
 	private Context mContext;
 
 	// Pass in the contact array into the constructor
-	public MarketAdapter( Context context, List<Market> markets )
+	public MarketAdapter( Context context, List<ShoppingList> shoppingLists )
 	{
-		mMarkets = markets;
+		mShoppingLists = shoppingLists;
 		mContext = context;
 	}
 
@@ -71,7 +71,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 	public void onBindViewHolder(MarketAdapter.ViewHolder viewHolder, int position)
 	{
 		// Get the data model based on position
-		Market market = mMarkets.get(position);
+		ShoppingList market = mShoppingLists.get(position);
 
 		// Set item views based on your views and data model
 		TextView textView = viewHolder.nameTextView;
@@ -82,6 +82,6 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 	@Override
 	public int getItemCount()
 	{
-		return mMarkets.size();
+		return mShoppingLists.size();
 	}
 }

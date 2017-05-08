@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
-	ArrayList<Market> markets;
+	ArrayList<ShoppingList> shoppingLists;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity
 		RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
 
 		// Initialize markets
-		markets = Market.createContactsList(20);
+		shoppingLists = ShoppingList.createShoppingLists();
 		// Create adapter passing in the sample user data
-		MarketAdapter adapter = new MarketAdapter(this, markets);
+		MarketAdapter adapter = new MarketAdapter(this, shoppingLists);
 		// Attach the adapter to the recyclerview to populate items
 		rvContacts.setAdapter(adapter);
 		// Set layout manager to position the items
