@@ -21,6 +21,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 		// for any view that will be set as you render a row
 		public TextView nameTextView;
 
+		public TextView descriptionTextView;
+
 		// We also create a constructor that accepts the entire item row
 		// and does the view lookups to find each subview
 		public ViewHolder( View itemView )
@@ -30,6 +32,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 			super(itemView);
 
 			nameTextView = (TextView) itemView.findViewById(R.id.shoppinglist_name);
+            descriptionTextView = (TextView) itemView.findViewById(R.id.shoppinglist_description);
 		}
 	}
 
@@ -59,11 +62,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 		LayoutInflater inflater = LayoutInflater.from(context);
 
 		// Inflate the custom layout
-		View contactView = inflater.inflate(R.layout.item_shoppinglist, parent, false);
+		View shoppingListItemView = inflater.inflate(R.layout.item_shoppinglist, parent, false);
 
 		// Return a new holder instance
-		ViewHolder viewHolder = new ViewHolder(contactView);
-		return viewHolder;
+		return new ViewHolder(shoppingListItemView);
 	}
 
 	// Involves populating data into the item through holder
@@ -74,8 +76,11 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 		ShoppingList shoppingList = mShoppingLists.get(position);
 
 		// Set item views based on your views and data model
-		TextView textView = viewHolder.nameTextView;
-		textView.setText(shoppingList.getName());
+		TextView textViewName = viewHolder.nameTextView;
+        textViewName.setText(shoppingList.getName());
+
+        TextView textViewDescription = viewHolder.descriptionTextView;
+        textViewDescription.setText(shoppingList.getDescription());
 	}
 
 	// Returns the total count of items in the list
