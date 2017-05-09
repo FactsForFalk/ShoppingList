@@ -34,12 +34,12 @@ public class ShoppingListAdd extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(ShoppingListAdd.this, MainActivity.class);
-                intent.putExtra("listName", editTextName.getText().toString());
-                intent.putExtra("listDescription", editTextDescription.getText().toString());
+			Intent intent = new Intent(ShoppingListAdd.this, MainActivity.class);
+			intent.putExtra("listName", editTextName.getText().toString());
+			intent.putExtra("listDescription", editTextDescription.getText().toString());
 
-                setResult(Activity.RESULT_OK, intent);
-                finish();
+			setResult(Activity.RESULT_OK, intent);
+			finish();
             }
         }));
 	}

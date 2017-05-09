@@ -7,45 +7,42 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
     RecyclerView rvShoppingLists;
     ShoppingListAdapter adapter;
-	ArrayList<ShoppingList> shoppingLists;
+    ArrayList<ShoppingList> shoppingLists;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.recylcer_view);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.recylcer_view);
 
-		// setContentView(R.layout.activity_users);
-		// Lookup the recyclerview in activity layout
-		rvShoppingLists = (RecyclerView) findViewById(R.id.rvContacts);
+        // setContentView(R.layout.activity_users);
+        // Lookup the recyclerview in activity layout
+        rvShoppingLists = (RecyclerView) findViewById(R.id.rvContacts);
 
-		// Initialize shoppingLists
-		shoppingLists = ShoppingList.createShoppingLists();
-		// Create adapter passing in the sample user data
-		adapter = new ShoppingListAdapter(this, shoppingLists);
-		// Attach the adapter to the recyclerview to populate items
+        // Initialize shoppingLists
+        shoppingLists = ShoppingList.createShoppingLists();
+        // Create adapter passing in the sample user data
+        adapter = new ShoppingListAdapter(this, shoppingLists);
+        // Attach the adapter to the recyclerview to populate items
         rvShoppingLists.setAdapter(adapter);
-		// Set layout manager to position the items
+        // Set layout manager to position the items
         rvShoppingLists.setLayoutManager(new LinearLayoutManager(this));
-		// That's all!
+        // That's all!
 
-		FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-		floatingActionButton.setOnClickListener((new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(MainActivity.this, ShoppingListAdd.class);
-				startActivityForResult(intent, 1); //1: code for adding new shoppinglist
-			}
-		}));
-	}
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ShoppingListAdd.class);
+                startActivityForResult(intent, 1); //1: code for adding new shoppinglist
+            }
+        }));
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) { //1: code for adding new shoppinglist
