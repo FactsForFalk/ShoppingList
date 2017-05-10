@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     RecyclerView rvShoppingLists;
     ShoppingListAdapter adapter;
-    ArrayList<ShoppingList> shoppingLists;
+    ArrayList<ShoppingList> shoppingLists = new ArrayList<ShoppingList>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         }));
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) { //1: code for adding new shoppinglist
             if (resultCode == RESULT_OK) { //user filled out and submitted form
