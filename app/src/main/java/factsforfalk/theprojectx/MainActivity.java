@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 String listDescription = data.getStringExtra("listDescription");
 
                 shoppingLists.add(new ShoppingList(0, listName, listDescription, null, null));
+
+                //notify any registered observers that the item reflected at position has been newly inserted,
+                //so that the RecyclerView gets updated
+                adapter.notifyItemInserted(shoppingLists.size() +1);
             } else {
                 System.out.println("result of Intent is not RESULT_OK");
             }
