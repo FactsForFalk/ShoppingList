@@ -40,15 +40,14 @@ public class ShoppingListAdd extends AppCompatActivity
 			if(editTextName.getText().length() < 3) {
 				editTextName.setError("Der Name der Liste soll mindestens 3 Zeichen beinhalten.");
 			} else {
-                intentSubmitShoppinglist.putExtra("listDescription",
-                        editTextDescription.getText().length() == 0
+                intentSubmitShoppinglist.putExtra("listDescription", editTextDescription.getText().length() == 0
                                 ? "Keine Beschreibung vorhanden"
                                 : editTextDescription.getText().toString());
 
 				intentSubmitShoppinglist.putExtra("listName", editTextName.getText().toString());
-
                 editTextName.setError(null);
 
+                //set result status for intent, that can be read in onActivityResult event
 				setResult(Activity.RESULT_OK, intentSubmitShoppinglist);
 				finish();
 			}
