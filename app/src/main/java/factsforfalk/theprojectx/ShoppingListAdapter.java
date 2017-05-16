@@ -2,6 +2,7 @@ package factsforfalk.theprojectx;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,25 @@ import java.util.List;
 // Note that we specify the custom ViewHolder which gives us access to our views
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>
 {
+    private static final String TAG = "ViewHolder";
+
+	// Store a member variable for the shopping-lists
+	private List<ShoppingList> mShoppingLists;
+	// Store the context for easy access
+	private Context mContext;
+
+	// Pass in the contact array into the constructor
+	public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists )
+	{
+		mShoppingLists = shoppingLists;
+		mContext = context;
+	}
+
+	// Easy access to the context object in the recyclerview
+	private Context getContext()
+	{
+		return mContext;
+	}
 
 	// Provide a direct reference to each of the views within a data item
 	// Used to cache the views within the item layout for fast access
@@ -34,9 +54,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 			// to access the context from any ViewHolder instance.
 			super(itemView);
 
-            // Store the context
-            this.context = context;
-
             itemView.setOnClickListener(this);
 			itemView.setOnLongClickListener(this);
 
@@ -47,6 +64,9 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition(); // gets item position
+
+            Log.d(TAG, "onClick " + getAdapterPosition() + " ");
+
             if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
 				Toast.makeText(view.getContext(), "Click: " + nameTextView.getText(), Toast.LENGTH_SHORT).show();
             }
@@ -54,27 +74,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
 		@Override
 		public boolean onLongClick(View view) {
+            Log.d(TAG, "onLongClick " + getAdapterPosition() + " ");
 			Toast.makeText(view.getContext(), "LongClick: " + nameTextView.getText(), Toast.LENGTH_SHORT).show();
-			return false;
+			return true;
 		}
-	}
-
-	// Store a member variable for the shopping-lists
-	private List<ShoppingList> mShoppingLists;
-	// Store the context for easy access
-	private Context mContext;
-
-	// Pass in the contact array into the constructor
-	public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists )
-	{
-		mShoppingLists = shoppingLists;
-		mContext = context;
-	}
-
-	// Easy access to the context object in the recyclerview
-	private Context getContext()
-	{
-		return mContext;
 	}
 
 	// Usually involves inflating a layout from XML and returning the holder
