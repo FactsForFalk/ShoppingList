@@ -63,19 +63,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         @Override
         public void onClick(View view) {
-            int position = getAdapterPosition(); // gets item position
-
             Log.d(TAG, "onClick " + getAdapterPosition() + " ");
-
-            if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
-				Toast.makeText(view.getContext(), "Click: " + nameTextView.getText(), Toast.LENGTH_SHORT).show();
-            }
         }
 
 		@Override
 		public boolean onLongClick(View view) {
             Log.d(TAG, "onLongClick " + getAdapterPosition() + " ");
-			Toast.makeText(view.getContext(), "LongClick: " + nameTextView.getText(), Toast.LENGTH_SHORT).show();
 			return true;
 		}
 	}
