@@ -39,7 +39,7 @@ public class ShoppingListAddActivity extends AppCompatActivity {
                     editTextDescription = (EditText) findViewById(R.id.editTextDescription);
                     Intent intentSubmitShoppinglist = new Intent(ShoppingListAddActivity.this, MainActivity.class);
                     intentSubmitShoppinglist.putExtra("listDescription", editTextDescription.getText().length() == 0
-                            ? "Keine Beschreibung vorhanden"
+                            ? null
                             : editTextDescription.getText().toString());
 
                     intentSubmitShoppinglist.putExtra("listName", editTextName.getText().toString());

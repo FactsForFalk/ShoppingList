@@ -92,7 +92,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         TextView textViewName = viewHolder.nameTextView;
         textViewName.setText(shoppingList.getName());
         TextView textViewDescription = viewHolder.descriptionTextView;
-        textViewDescription.setText(shoppingList.getDescription());
+        textViewDescription.setText(shoppingList.getDescription().length() == 0
+                ? "Keine Beschreibung vorhanden."
+                : shoppingList.getDescription()
+        );
     }
 
     // Returns the total count of items in the list
