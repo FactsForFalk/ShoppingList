@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShoppingListAdd"></activity>
+        <activity android:name=".Goods"></activity>
     </application>
 
 </manifest>
