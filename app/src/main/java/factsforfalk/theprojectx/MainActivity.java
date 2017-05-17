@@ -11,6 +11,10 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import factsforfalk.theprojectx.activity.ShoppingListAddActivity;
+import factsforfalk.theprojectx.adapter.ShoppingListAdapter;
+import factsforfalk.theprojectx.models.ShoppingList;
+
 public class MainActivity extends AppCompatActivity
 {
 	private static final String TAG = "MainActivity";
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				Intent intent = new Intent(MainActivity.this, ShoppingListAdd.class);
+				Intent intent = new Intent(MainActivity.this, ShoppingListAddActivity.class);
 				startActivityForResult(intent, 1); // 1: code for adding new shoppinglist
 			}
 		}));

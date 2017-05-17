@@ -1,4 +1,4 @@
-package factsforfalk.theprojectx;
+package factsforfalk.theprojectx.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import factsforfalk.theprojectx.R;
+import factsforfalk.theprojectx.models.ShoppingList;
+import factsforfalk.theprojectx.activity.GoodsActivity;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
@@ -39,8 +43,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getContext(), Goods.class);
-            getContext().startActivity(intent);
+            getContext().startActivity(new Intent(getContext(), GoodsActivity.class));
             Log.d(TAG, "onClick " + getAdapterPosition());
         }
 
@@ -48,7 +51,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         public boolean onLongClick(View v) {
             Log.d(TAG, "onLongClick " + getAdapterPosition());
             removeItem(getAdapterPosition());
-            return false;
+            return true;
         }
     }
 
@@ -106,6 +109,5 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     public void removeItem(int position) {
         mShoppingLists.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mShoppingLists.size());
     }
 }

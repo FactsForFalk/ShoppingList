@@ -1,4 +1,4 @@
-package factsforfalk.theprojectx;
+package factsforfalk.theprojectx.models;
 
 import android.graphics.Color;
 
