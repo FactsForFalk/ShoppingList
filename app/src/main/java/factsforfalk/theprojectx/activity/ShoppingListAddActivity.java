@@ -18,7 +18,6 @@ public class ShoppingListAddActivity extends AppCompatActivity {
     EditText editTextName;
     EditText editTextDescription;
     Button buttonSubmitListConfig;
-    Intent intentSubmitShoppinglist = new Intent(ShoppingListAddActivity.this, MainActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,7 @@ public class ShoppingListAddActivity extends AppCompatActivity {
                     editTextName.setError("Der Name der Liste soll mindestens 3 Zeichen beinhalten.");
                 } else {
                     editTextDescription = (EditText) findViewById(R.id.editTextDescription);
+                    Intent intentSubmitShoppinglist = new Intent(ShoppingListAddActivity.this, MainActivity.class);
                     intentSubmitShoppinglist.putExtra("listDescription", editTextDescription.getText().length() == 0
                             ? "Keine Beschreibung vorhanden"
                             : editTextDescription.getText().toString());
