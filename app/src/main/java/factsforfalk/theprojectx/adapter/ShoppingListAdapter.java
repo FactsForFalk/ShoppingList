@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,8 +26,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
-    public class ViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener, View.OnLongClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private static final String TAG = "ViewHolder";
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
@@ -49,8 +53,38 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         @Override
         public boolean onLongClick(View v) {
+
             Log.d(TAG, "onLongClick " + getAdapterPosition());
-            removeItem(getAdapterPosition());
+            v.startActionMode(new ActionMode.Callback() {
+                @Override
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    MenuInflater inflater = mode.getMenuInflater();
+                    inflater.inflate(R.menu.action_mode, menu);
+                    return true;
+                }
+
+                @Override
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                }
+
+                @Override
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.action_delete:
+                            Toast.makeText(mContext, "geht noch nicht", Toast.LENGTH_SHORT).show();
+                            //removeItem(getAdapterPosition());
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+
+                @Override
+                public void onDestroyActionMode(ActionMode mode) {
+
+                }
+            });
             return true;
         }
     }
@@ -92,10 +126,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         TextView textViewName = viewHolder.nameTextView;
         textViewName.setText(shoppingList.getName());
         TextView textViewDescription = viewHolder.descriptionTextView;
-        textViewDescription.setText(shoppingList.getDescription().length() == 0
-                ? "Keine Beschreibung vorhanden."
-                : shoppingList.getDescription()
-        );
+        textViewDescription.setText(shoppingList.getDescription().length() == 0 ? "Keine Beschreibung vorhanden."
+                : shoppingList.getDescription());
     }
 
     // Returns the total count of items in the list
