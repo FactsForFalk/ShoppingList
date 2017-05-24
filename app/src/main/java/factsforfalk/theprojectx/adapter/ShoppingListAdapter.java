@@ -72,8 +72,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.action_delete:
-                            Toast.makeText(mContext, "geht noch nicht", Toast.LENGTH_SHORT).show();
-                            //removeItem(getAdapterPosition());
+                            ShoppingListAdapter.this.removeItem(getAdapterPosition());
+                            mode.finish();//Finish action mode after use
                             return true;
                         default:
                             return false;
