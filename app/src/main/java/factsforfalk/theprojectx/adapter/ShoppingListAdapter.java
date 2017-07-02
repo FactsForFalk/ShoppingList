@@ -2,6 +2,7 @@ package factsforfalk.theprojectx.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ActionMode;
@@ -12,8 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import factsforfalk.theprojectx.R;
@@ -23,6 +24,12 @@ import factsforfalk.theprojectx.activity.GoodsActivity;
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder> {
+
+    private ArrayList<ShoppingList> selectedItems = new ArrayList<ShoppingList>();
+    // Store a member variable for the shopping-lists
+    private List<ShoppingList> mShoppingLists;
+    // Store the context for easy access
+    private Context mContext;
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -45,6 +52,20 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             descriptionTextView = (TextView) itemView.findViewById(R.id.shoppinglist_description);
         }
 
+        private boolean multiSelect = true;
+
+        void selectItem(int item, View v) {
+            if (multiSelect) {
+                if (selectedItems.contains(mShoppingLists.get(item))) {
+                    selectedItems.remove(mShoppingLists.get(item));
+                    v.setBackgroundColor(Color.WHITE);
+                } else {
+                    selectedItems.add(mShoppingLists.get(item));
+                    v.setBackgroundColor(Color.LTGRAY);
+                }
+            }
+        }
+
         @Override
         public void onClick(View v) {
             getContext().startActivity(new Intent(getContext(), GoodsActivity.class));
@@ -52,9 +73,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         }
 
         @Override
-        public boolean onLongClick(View v) {
-
-            Log.d(TAG, "onLongClick " + getAdapterPosition());
+        public boolean onLongClick(final View v) {
+            selectItem(getAdapterPosition(), v);
             v.startActionMode(new ActionMode.Callback() {
                 @Override
                 public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -70,14 +90,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.action_delete:
-                            ShoppingListAdapter.this.removeItem(getAdapterPosition());
-                            mode.finish();//Finish action mode after use
-                            return true;
-                        default:
-                            return false;
+                    for (ShoppingList intItem : selectedItems) {
+                        mShoppingLists.remove(intItem);
                     }
+                    selectedItems.clear();
+                    mode.finish();
+                    return true;
                 }
 
                 @Override
@@ -88,11 +106,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             return true;
         }
     }
-
-    // Store a member variable for the shopping-lists
-    private List<ShoppingList> mShoppingLists;
-    // Store the context for easy access
-    private Context mContext;
 
     // Pass in the contact array into the constructor
     public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists) {
