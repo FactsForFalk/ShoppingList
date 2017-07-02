@@ -94,13 +94,13 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                         mShoppingLists.remove(intItem);
                     }
                     selectedItems.clear();
+                    notifyDataSetChanged();
                     mode.finish();
                     return true;
                 }
 
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
-
                 }
             });
             return true;
