@@ -3,8 +3,10 @@ package factsforfalk.theprojectx.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,7 +14,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         // for any view that will be set as you render a row
         public TextView nameTextView;
         public TextView descriptionTextView;
+        public LinearLayout linearLayout;
+        private SparseBooleanArray sparseBooleanArray;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -48,6 +55,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
+
             nameTextView = (TextView) itemView.findViewById(R.id.shoppinglist_name);
             descriptionTextView = (TextView) itemView.findViewById(R.id.shoppinglist_description);
         }
@@ -58,10 +67,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             if (multiSelect) {
                 if (selectedItems.contains(mShoppingLists.get(item))) {
                     selectedItems.remove(mShoppingLists.get(item));
-                    v.setBackgroundColor(Color.WHITE);
+                    linearLayout.setSelected(false);
                 } else {
                     selectedItems.add(mShoppingLists.get(item));
-                    v.setBackgroundColor(Color.LTGRAY);
+                    linearLayout.setSelected(true);
                 }
             }
         }
@@ -74,6 +83,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         @Override
         public boolean onLongClick(final View v) {
+            //linearLayout.setSelected(sparseBooleanArray.get(getAdapterPosition(), false));
             selectItem(getAdapterPosition(), v);
             v.startActionMode(new ActionMode.Callback() {
                 @Override
@@ -93,18 +103,20 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                     for (ShoppingList intItem : selectedItems) {
                         mShoppingLists.remove(intItem);
                     }
-                    selectedItems.clear();
                     notifyDataSetChanged();
+                    selectedItems.clear();
                     mode.finish();
                     return true;
                 }
 
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
+                    Toast.makeText(mContext, "ich wurde geklickt", Toast.LENGTH_SHORT).show();
                 }
             });
             return true;
         }
+
     }
 
     // Pass in the contact array into the constructor
