@@ -147,6 +147,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         // Get the data model based on position
         ShoppingList shoppingList = mShoppingLists.get(position);
 
+        if (!selectedItems.contains(mShoppingLists.get(position))) {
+            viewHolder.linearLayout.setSelected(false);
+        } else {
+            viewHolder.linearLayout.setSelected(true);
+        }
+
         // Set item views based on your views and data model
         TextView textViewName = viewHolder.nameTextView;
         textViewName.setText(shoppingList.getName());
